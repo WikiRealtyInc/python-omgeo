@@ -8,7 +8,6 @@ from omgeo.preprocessors import CancelIfPOBox, CountryPreProcessor, RequireCount
     ParseSingleLine, ReplaceRangeWithNumber
 from omgeo.postprocessors import AttrFilter, AttrExclude, AttrRename, AttrSorter, \
     AttrMigrator, UseHighScoreIfAtLeast, GroupBy, ScoreSorter
-from suds.client import Client
 import time
 from urllib import unquote
 
@@ -106,6 +105,7 @@ class Bing(GeocodeService):
             c.x = r['geocodePoints'][0]['coordinates'][1]  # long, ex. -122.13
             c.y = r['geocodePoints'][0]['coordinates'][0]  # lat, ex. 47.64
             c.wkid = 4326
+            c.address = r['address']
             c.geoservice = self.__class__.__name__
             returned_candidates.append(c)
         return returned_candidates
@@ -212,6 +212,7 @@ class _EsriGeocodeService(GeocodeService):
 
 class _EsriSoapGeocodeService(_EsriGeocodeService):
     def __init__(self, preprocessors=None, postprocessors=None, settings=None):
+        from suds.client import Client
         # First, initialize the usual geocoder stuff like settings and
         # processors
         _EsriGeocodeService.__init__(self, preprocessors, postprocessors, settings)
