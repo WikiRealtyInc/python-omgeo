@@ -24,6 +24,6 @@ setup(
         'Programming Language :: Python :: 2.6'
     ],
     dependency_links=['http://github.com/htj/suds-htj/tarball/master#suds=0.4.1-htj'],
-    install_requires=['suds>=0.4'],
+    install_requires=[],
     test_suite='omgeo.tests.tests',
 )
