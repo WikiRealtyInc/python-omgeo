@@ -790,6 +790,9 @@ class MapQuest(GeocodeService):
 class MapQuestSSL(MapQuest):
     _endpoint = 'https://www.mapquestapi.com/geocoding/v1/address'
 
+class MapQuestOpen(MapQuest):
+    _endpoint = 'http://open.mapquestapi.com/geocoding/v1/address'
+
 class Nominatim(GeocodeService):
     """
     Class to geocode using `Nominatim services hosted
