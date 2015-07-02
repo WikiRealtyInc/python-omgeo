@@ -22,7 +22,7 @@ class Viewbox():
             raise ValueError('Left x-coord must be less than right x-coord.')
         if bottom > top:
             raise ValueError('Bottom y-coord must be less than top y-coord.')
-        for k in locals().keys():
+        for k in list(locals()):
             if k != 'self': setattr(self, k, locals()[k])
 
     def to_bing_str(self):
@@ -131,7 +131,7 @@ class PlaceQuery():
                           would be returned as "Vereinigte Staaten Von Amerika"
                           instead of "United States".
     """
-        for k in locals().keys():
+        for k in list(locals()):
             if k not in ['self', 'kwargs']: setattr(self, k, locals()[k])
         if query == '' and address == '' and city == '' and state == '' and postal == '':
             raise Exception('Must provide query or one or more of address, city, state, and postal.')
@@ -142,7 +142,7 @@ class PlaceQuery():
         return '<%s%s %s>' % (self.query, self.address, self.postal)
 
 
-class Candidate():
+class Candidate:
     """
     Class representing a candidate address returned from geocoders.
     Accepts arguments defined below, plus informal keyword arguments.
@@ -186,7 +186,7 @@ class Candidate():
         return these values.
         """
 
-        for k in locals().keys():
+        for k in list(locals()):
             if k not in ['self', 'kwargs']: setattr(self, k, locals()[k])
         for k in kwargs:
             setattr(self, k, kwargs[k])

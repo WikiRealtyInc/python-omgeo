@@ -5,8 +5,9 @@ import logging
 import socket
 import time
 from traceback import format_exc
-from urllib import urlencode
-from urllib2 import HTTPError, urlopen, URLError, Request
+from urllib.parse import urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError, URLError
 from xml.dom import minidom
 
 logger = logging.getLogger(__name__)
@@ -155,7 +156,7 @@ class GeocodeService():
         response = self._get_response(endpoint, query)
         content = response.read()
         try:
-            return loads(content)
+            return loads(content.decode('utf-8'))
         except ValueError:
             raise Exception('Could not decode content to JSON:\n%s'
                             % self.__class__.__name__, content)

@@ -393,7 +393,7 @@ class DupePicker(_PostProcessor):
     def process(self, candidates):
         def cleanup(str_):
             """Returns string in uppercase and free of commas."""
-            if type(str_) in [str, unicode]:
+            if type(str_) == str:
                 return str_.replace(',', '').upper()
             return str_
         
