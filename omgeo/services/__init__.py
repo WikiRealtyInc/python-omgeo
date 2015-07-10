@@ -1,6 +1,6 @@
 import re
 
-from base import GeocodeService
+from .base import GeocodeService
 import json
 import logging
 from omgeo.places import Candidate
@@ -9,8 +9,10 @@ from omgeo.preprocessors import CancelIfPOBox, CountryPreProcessor, RequireCount
 from omgeo.postprocessors import AttrFilter, AttrExclude, AttrRename, AttrSorter, \
     AttrMigrator, UseHighScoreIfAtLeast, GroupBy, ScoreSorter
 import time
-from urllib import unquote
-
+try:
+    from urllib import unquote
+except ImportError:
+    from urllib.parse import unquote
 logger = logging.getLogger(__name__)
 
 

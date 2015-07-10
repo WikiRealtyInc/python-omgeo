@@ -131,7 +131,7 @@ class PlaceQuery():
                           would be returned as "Vereinigte Staaten Von Amerika"
                           instead of "United States".
     """
-        for k in locals().keys():
+        for k in list(locals()):
             if k not in ['self', 'kwargs']: setattr(self, k, locals()[k])
         if query == '' and address == '' and city == '' and state == '' and postal == '':
             raise Exception('Must provide query or one or more of address, city, state, and postal.')

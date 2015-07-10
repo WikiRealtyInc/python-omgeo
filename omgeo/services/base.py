@@ -5,8 +5,15 @@ import logging
 import socket
 import time
 from traceback import format_exc
-from urllib import urlencode
-from urllib2 import HTTPError, urlopen, URLError, Request
+try:
+    from urllib import urlencode
+except ImportError:
+    from urllib.parse import urlencode
+try:
+    from urllib2 import HTTPError, urlopen, URLError, Request
+except ImportError:
+    from urllib.error import HTTPError, URLError
+    from urllib.request import urlopen, Request
 from xml.dom import minidom
 
 logger = logging.getLogger(__name__)

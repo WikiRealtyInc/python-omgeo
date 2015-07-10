@@ -97,7 +97,7 @@ class Geocoder():
 
         start_time = time.time()
         waterfall = self.waterfall if waterfall is None else waterfall
-        if type(pq) in (str, unicode):
+        if isinstance(pq, str):
             pq = PlaceQuery(pq)
         processed_pq = copy.copy(pq)
 
