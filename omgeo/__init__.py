@@ -125,12 +125,11 @@ class Geocoder():
                       upstream_response_info=upstream_response_info_list)
         stats_dict = self.convert_geocode_result_to_nested_dicts(result)
         stats_dict = dict(stats_dict, original_pq=pq.__dict__)
-        try:
-            stats_logger.info(stats_dict)
-        except Exception as exception:
-            logger.error('Encountered exception while logging stats %s:\n%s', stats_dict, exception)
-            if force_stats_logging:
-                raise exception
+        if force_stats_logging:
+            try:
+                stats_logger.info(stats_dict)
+            except Exception as exception:
+                logger.error('Encountered exception while logging stats %s:\n%s', stats_dict, exception)
         return result
 
     def get_candidates(self, pq, waterfall=None):
