@@ -162,7 +162,7 @@ class GeocodeService():
         response = self._get_response(endpoint, query)
         content = response.read()
         try:
-            return loads(content)
+            return loads(content.decode("utf-8"))
         except ValueError:
             raise Exception('Could not decode content to JSON:\n%s'
                             % self.__class__.__name__, content)

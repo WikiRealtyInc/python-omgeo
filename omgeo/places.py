@@ -22,7 +22,7 @@ class Viewbox():
             raise ValueError('Left x-coord must be less than right x-coord.')
         if bottom > top:
             raise ValueError('Bottom y-coord must be less than top y-coord.')
-        for k in locals().keys():
+        for k in list(locals()):
             if k != 'self': setattr(self, k, locals()[k])
 
     def to_bing_str(self):
@@ -186,7 +186,7 @@ class Candidate():
         return these values.
         """
 
-        for k in locals().keys():
+        for k in list(locals()):
             if k not in ['self', 'kwargs']: setattr(self, k, locals()[k])
         for k in kwargs:
             setattr(self, k, kwargs[k])

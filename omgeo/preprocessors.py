@@ -183,14 +183,14 @@ class CancelIfRegexInAttr(_PreProcessor):
         :arg bool ignorecase: set to ``False`` for a case-sensitive match (default ``True``)
         """
         regex_type = type(regex)
-        if type(regex) not in (str, unicode):
+        if isinstance(regex, str):
             raise Exception('First param "regex" must be a regex of type'\
-                            ' str or unicode, not %s.' % regex_type)
+                            ' str, not %s.' % regex_type)
         attrs_type = type(attrs)
         if attrs_type not in (list, tuple):
             raise Exception('Second param "attrs" must be a list or tuple'\
                             ' of PlaceQuery attributes, not %s.' % attrs_type)
-        if any(type(attr) not in (str, unicode) for attr in attrs):
+        if any(not isinstance(attr, str) for attr in attrs):
             raise Exception('All given PlaceQuery attributes must be strings.')
         self.attrs = attrs
         if ignorecase:
